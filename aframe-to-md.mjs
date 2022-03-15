@@ -36,8 +36,8 @@ global.AFRAME= {
 				table.push(out);
 			}
 		}
+		console.log(`### ${name} component` + '\n');
 		if (details.description) {
-			console.log(`### ${name} component` + '\n');
 			console.log(details.description + '\n');
 		}
 		if (table.length) {

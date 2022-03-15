@@ -16,6 +16,8 @@ This defines a catmull rom spline curve. It is exposed on el.components.curve.cu
 A point that tracks itself in 3D world space and updates the curve that it has changed.
 
 No configuration required
+### draw-curve component
+
 | Property | Type     | Description | Default |
 | :------- | :------- | :---------- | :------ |
 | curve    | selector |             |         |
@@ -23,6 +25,8 @@ No configuration required
 | tangent  | boolean  |             | false   |
 | normal   | boolean  |             | false   |
 | length   | number   |             | 0.1     |
+
+### clone-along-curve component
 
 | Property | Type     | Description | Default             |
 | :------- | :------- | :---------- | :------------------ |
