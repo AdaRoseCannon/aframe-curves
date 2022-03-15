@@ -14,39 +14,9 @@ const __tempQuaternion = new THREE.Quaternion();
 const zeroVector3 = new THREE.Vector3(0, 0, 0);
 const zAxis = new THREE.Vector3(0, 0, 1);
 
-AFRAME.registerComponent('curve-point', {
-
-	dependencies: ['position'],
-
-	schema: {},
-
-	init: function () {
-		let el = this.el;
-		while (el && el.matches && !el.matches('a-curve,[curve]')) el = el.parentNode;
-		if (!el) throw Error('curve-points need to be inside a curve');
-		this.parentCurve = el;
-		this.oldPos = new THREE.Vector3();
-	},
-
-	update: function () {
-		this.el.emit('point-change');
-	},
-
-	tick() {
-		const worldPos = this.el.object3D.getWorldPosition(__tempPointA);
-		if (this.oldPos.manhattanDistanceTo(worldPos) !== 0) {
-			this.el.emit('point-shift');
-		}
-		this.oldPos.copy(worldPos);
-	},
-
-	remove: function () {
-		this.el.emit('point-change');
-	}
-
-});
-
 AFRAME.registerComponent('curve', {
+
+	description: `This defines a catmull rom spline curve. It is exposed on el.components.curve.curve, `,
 
 	schema: {
 
@@ -55,6 +25,7 @@ AFRAME.registerComponent('curve', {
 		},
 
 		closed: {
+			description: `Whether it joins back up with it's tail`,
 			default: false
 		}
 	},
@@ -203,6 +174,38 @@ AFRAME.registerComponent('curve', {
 	}
 });
 
+
+
+AFRAME.registerComponent('curve-point', {
+	description: `A point that tracks itself in 3D world space and updates the curve that it has changed.`,
+	dependencies: ['position'],
+	schema: {},
+
+	init: function () {
+		let el = this.el;
+		while (el && el.matches && !el.matches('a-curve,[curve]')) el = el.parentNode;
+		if (!el) throw Error('curve-points need to be inside a curve');
+		this.parentCurve = el;
+		this.oldPos = new THREE.Vector3();
+	},
+
+	update: function () {
+		this.el.emit('point-change');
+	},
+
+	tick() {
+		const worldPos = this.el.object3D.getWorldPosition(__tempPointA);
+		if (this.oldPos.manhattanDistanceTo(worldPos) !== 0) {
+			this.el.emit('point-shift');
+		}
+		this.oldPos.copy(worldPos);
+	},
+
+	remove: function () {
+		this.el.emit('point-change');
+	}
+
+});
 
 const tempQuaternion = new THREE.Quaternion();
 function normalFromTangent(tangent, outVec) {

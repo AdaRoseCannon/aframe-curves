@@ -1,0 +1,19 @@
+{
+  "name": "aframe-curves",
+  "version": "1.0.0",
+  "description": "Components for dealing with spline curves",
+  "repository": "https://github.com/AdaRoseCannon/aframe-curves",
+  "scripts": {
+    "docs": "awk '\n BEGIN {p=1}\n /^<!--DOCS-->/ {print;system(\"node ./aframe-to-md.mjs ./src/curve.js\");p=0}\n /^<!--DOCS_END-->/ {p=1}\n p' README.md > ~README.md && mv ~README.md README.md",
+    "build": "rollup -c && find build -maxdepth 2 -iname \"*.js\" -not -type d -exec du -h {} \\;;npm run docs",
+    "develop": "rollup -w -c"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-strip": "^2.1.0",
+    "rollup": "^2.67.2",
+    "tablemark": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
