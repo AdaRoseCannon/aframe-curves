@@ -57,7 +57,7 @@ global.AFRAME= {
 				table.push(out);
 			}
 			if (table.length) {
-				console.log(`_Default Components:_` + '\n');
+				console.log(`**Default Components:**` + '\n');
 				console.log(tablemark(table));
 			}
 		}
@@ -68,7 +68,7 @@ global.AFRAME= {
 				table.push(out);
 			}
 			if (table.length) {
-				console.log(`_Entity Attribute Mappings:_` + '\n');
+				console.log(`**Entity Attribute Mappings:**` + '\n');
 				console.log(tablemark(table));
 			}
 		}

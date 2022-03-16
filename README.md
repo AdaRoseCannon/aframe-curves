@@ -40,13 +40,13 @@ Apply this to the curve element, or set one seperately, to instance element at f
 
 Describes a curve doesn't display anything unless one of the other components is used
 
-_Default Components:_
+**Default Components:**
 
 | Default component | Settings |
 | :---------------- | :------- |
 | curve             | {}       |
 
-_Entity Attribute Mappings:_
+**Entity Attribute Mappings:**
 
 | Property | Mapping         |
 | :------- | :-------------- |
@@ -57,7 +57,7 @@ _Entity Attribute Mappings:_
 
 This is used to set the control points of the curve, they don't need to be immediate children.
 
-_Default Components:_
+**Default Components:**
 
 | Default component | Settings |
 | :---------------- | :------- |
@@ -67,14 +67,14 @@ _Default Components:_
 
 Describes a curve this uses the draw-curve component to draw a line where the curve is.
 
-_Default Components:_
+**Default Components:**
 
 | Default component | Settings |
 | :---------------- | :------- |
 | draw-curve        | {}       |
 | curve             | {}       |
 
-_Entity Attribute Mappings:_
+**Entity Attribute Mappings:**
 
 | Property | Mapping            |
 | :------- | :----------------- |
