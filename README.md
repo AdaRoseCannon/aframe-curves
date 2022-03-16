@@ -1,5 +1,21 @@
 # AFrame-Curves
-Components  for dealing with spline curves
+Components  for dealing with spline curves,
+
+quick use, this will clone `#tracks-glb` along this curve. the `curve-point` don't need to be direct descendents of the `<a-curve>` you can nest them or stack them on each other. You can also move them around and the curve wil ladjust. Although if the number of the cloned models increases then it will need to perform an expensive operation so try
+to avoid doing it on a per-frame basis but occasionally is fine.
+
+```html
+<script src="https://unpkg.com/aframe-curves@1.0.0/build/curve.min.js"></script>
+
+<a-scene>
+  <a-curve closed="true" tension="0.1" clone-along-curve="spacing: 0.06;scale:0.4 0.4 0.4;" gltf-model="#tracks-glb">
+    <a-curve-point position="0 0 -3" gltf-model="#flag-glb"></a-curve-point>
+    <a-curve-point position="-3 0 -3" gltf-model="#flag-glb"></a-curve-point>
+    <a-curve-point position="-3 0 0" gltf-model="#flag-glb"></a-curve-point>
+    <a-curve-point position="0 0 0" gltf-model="#flag-glb"></a-curve-point>
+  </a-curve>
+</a-scene>
+```
 
 <!--DOCS-->
 ### curve component
