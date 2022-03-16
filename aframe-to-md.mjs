@@ -49,7 +49,7 @@ global.AFRAME= {
 	registerPrimitive: function (name, details) {
 		const table = [];
 		console.log(`### &lt;${name}&gt;` + '\n');
-		if (details.description) console.log(details.description);
+		if (details.description) console.log(details.description + '\n');
 		if (details.defaultComponents) {
 			const table = [];
 			for (const [defaultComponent, settings] of Object.entries(details.defaultComponents)) {
@@ -57,7 +57,7 @@ global.AFRAME= {
 				table.push(out);
 			}
 			if (table.length) {
-				console.log(`Default Components:` + '\n');
+				console.log(`_Default Components:_` + '\n');
 				console.log(tablemark(table));
 			}
 		}
@@ -68,7 +68,7 @@ global.AFRAME= {
 				table.push(out);
 			}
 			if (table.length) {
-				console.log(`Entity Attribute Mappings:` + '\n');
+				console.log(`_Entity Attribute Mappings:_` + '\n');
 				console.log(tablemark(table));
 			}
 		}
