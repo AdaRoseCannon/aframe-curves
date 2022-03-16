@@ -16,11 +16,12 @@ const zAxis = new THREE.Vector3(0, 0, 1);
 
 AFRAME.registerComponent('curve', {
 
-	description: `This defines a catmull rom spline curve. It is exposed on el.components.curve.curve, `,
+	description: `This defines a Catmull-Rom spline curve. It is exposed on el.components.curve.curve, `,
 
 	schema: {
 
 		tension: {
+			description: `[The Catmull-Rom Tension](https://www.w3.org/Graphics/SVG/WG/wiki/Path_Enhancements#:~:text=A%20Catmull%2DRom%20curve%20is,not%20through%2C%20the%20points%29)`,
 			default: 0.25
 		},
 
@@ -221,11 +222,26 @@ AFRAME.registerComponent('draw-curve', {
 	dependencies: ['curve', 'material'],
 
 	schema: {
-		curve: { type: 'selector' },
-		spacing: { default: 0.5 },
-		tangent: { default: false },
-		normal: { default: false },
-		length: { default: 0.1 }
+		curve: { 
+			description: `Curve to draw, defaults to the curve on the same entity.`,	
+			type: 'selector'
+		},
+		spacing: { 
+			description: `How far apart to place the line segments, smaller is a smoother curve.`,	
+			default: 0.5
+		},
+		tangent: { 
+			description: `Draw curve tangents`,	
+			default: false
+		},
+		normal: { 
+			description: `Draw curve normals`,	
+			default: false
+		},
+		length: { 
+			description: `Length to draw the normal and tangent markers`,	
+			default: 0.1
+		}
 	},
 
 	init: function () {
@@ -325,12 +341,21 @@ function nearestPointInPlane(position, normal, p1, out) {
 
 AFRAME.registerComponent('clone-along-curve', {
 
+	description: `Apply this to the curve element, or set one seperately, to instance element at fixed intervals along a curve. They will be rotated to follw the curve.`,
+
 	dependencies: ['curve'],
 
 	schema: {
-		curve: { type: 'selector' },
-		spacing: { default: 1 },
+		curve: {
+			description: `Optional, pick a particular curve to use, it defaults to the curve on it's own element`,
+			type: 'selector'
+		},
+		spacing: { 
+			description: `How far apart to place the elements`,		
+			default: 1
+		},
 		scale: {
+			description: `Scale of the elements`,	
 			type: 'vec3',
 			default: {x:1,y:1,z:1}
 		}
@@ -450,23 +475,10 @@ AFRAME.registerComponent('clone-along-curve', {
 
 });
 
-AFRAME.registerPrimitive('a-draw-curve', {
-	defaultComponents: {
-		'draw-curve': {}
-	},
-	mappings: {
-		curve: 'draw-curve.curve'
-	}
-});
-
-AFRAME.registerPrimitive('a-curve-point', {
-	defaultComponents: {
-		'curve-point': {}
-	}
-});
-
 
 AFRAME.registerPrimitive('a-curve', {
+
+	description: `Describes a curve doesn't display anything unless one of the other components is used`,
 
 	defaultComponents: {
 		'curve': {}
@@ -476,6 +488,28 @@ AFRAME.registerPrimitive('a-curve', {
 		tension: 'curve.tension'
 	}
 
+});
+
+AFRAME.registerPrimitive('a-curve-point', {
+	description: `This is used to set the control points of the curve, they don't need to be immediate children.`,
+	defaultComponents: {
+		'curve-point': {}
+	}
+});
+
+AFRAME.registerPrimitive('a-draw-curve', {
+
+	description: `Describes a curve this uses the draw-curve component to draw a line where the curve is.`,
+
+	defaultComponents: {
+		'draw-curve': {},
+		'curve': {}
+	},
+	mappings: {
+		curve: 'draw-curve.curve',
+		closed: 'curve.closed',
+		tension: 'curve.tension'
+	}
 });
 
 }());

@@ -48,19 +48,29 @@ global.AFRAME= {
 	},
 	registerPrimitive: function (name, details) {
 		const table = [];
-		for (const [defaultComponent, settings] of Object.entries(details.defaultComponents)) {
-			const out = {defaultComponent, settings: JSON.stringify(settings)};
-			table.push(out);
-		}
-		if (details.mappings) {
-			for (const [property, mapping] of Object.entries(details.mappings)) {
-				const out = {property, mapping};
+		console.log(`### &lt;${name}&gt;` + '\n');
+		if (details.description) console.log(details.description);
+		if (details.defaultComponents) {
+			const table = [];
+			for (const [defaultComponent, settings] of Object.entries(details.defaultComponents)) {
+				const out = {defaultComponent, settings: JSON.stringify(settings)};
 				table.push(out);
 			}
+			if (table.length) {
+				console.log(`Default Components:` + '\n');
+				console.log(tablemark(table));
+			}
 		}
-		if (table.length) {
-			console.log(`### &lt;${name}&gt;` + '\n');
-			console.log(tablemark(table));
+		if (details.mappings) {
+			const table = [];
+			for (const [property, mapping] of Object.entries(details.mappings)) {
+				const out = {property, mapping:JSON.stringify(mapping)};
+				table.push(out);
+			}
+			if (table.length) {
+				console.log(`Entity Attribute Mappings:` + '\n');
+				console.log(tablemark(table));
+			}
 		}
 	}
 }
